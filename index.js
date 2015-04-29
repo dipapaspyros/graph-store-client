@@ -47,7 +47,7 @@ var GraphStoreClient = module.exports = function(endpoint, graphStoreEndpoint){
 	this.graphStoreEndpoint = graphStoreEndpoint;
 	this.ns = new Resolver;
 	this._request = rest
-		.wrap(require("rest/interceptor/mime"), {accept: "application/sparql-results+json"})
+		.wrap(require("rest/interceptor/mime"), {accept: "application/sparql-results+json", mime: "application/json"})
 		.wrap(sparqlInterceptor())
 	this._del_request = rest
 		.wrap(sparqlInterceptor())
@@ -75,7 +75,7 @@ GraphStoreClient.prototype = {
 		debug("Running SPARQL: %s", sparql);
 		return rest
 		// .wrap(debugInterceptor())
-		.wrap(require("rest/interceptor/mime"), {accept: "application/sparql-results+json"})
+		.wrap(require("rest/interceptor/mime"), {accept: "application/sparql-results+json", mime: "application/json"})
 		.wrap(sparqlInterceptor())
 		({
 			path: this.endpoint,
